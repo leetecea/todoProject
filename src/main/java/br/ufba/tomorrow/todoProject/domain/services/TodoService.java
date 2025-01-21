@@ -49,4 +49,18 @@ public class TodoService {
 		else throw new Exception("Objeto não encontrado com id:" + dto.getId());
 	}
 
+	public TodoDTO remover(Long tarefaId) throws Exception {
+	    Todo tarefa = repository.findById(tarefaId)
+	            .orElseThrow(() -> new Exception("Tarefa não encontrada com id: " + tarefaId));
+	    repository.delete(tarefa);
+	    return new TodoDTO(tarefa); 
+	}
+	
+	public TodoDTO concluir(Long tarefaId) throws Exception {
+	    Todo tarefa = repository.findById(tarefaId)
+	            .orElseThrow(() -> new Exception("Tarefa não encontrada com id: " + tarefaId));
+	    tarefa.setStatus(Estado.CONCLUIDO); 
+	    return new TodoDTO(repository.save(tarefa));
+	}
+	
 }

@@ -59,12 +59,12 @@ public class TodoController {
 
 	
 	@DeleteMapping("/{tarefaId}")
-	public ResponseEntity<TodoDTO> removerUsuario(@PathVariable Long tarefaId){
-		return null;
+	public ResponseEntity<TodoDTO> removerUsuario(@PathVariable Long tarefaId) throws Exception{
+		return new ResponseEntity<TodoDTO>(service.remover(tarefaId), HttpStatus.OK);
 	}
 	
-	@PatchMapping
-	public ResponseEntity<TodoDTO> concluir(){
-		return null;
+	@PatchMapping("/{tarefaId}")
+	public ResponseEntity<TodoDTO> concluir(@PathVariable Long tarefaId) throws Exception{
+		return new ResponseEntity<TodoDTO>(service.concluir(tarefaId), HttpStatus.OK);
 	}
 }
